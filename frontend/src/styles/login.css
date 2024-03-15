@@ -1,0 +1,28 @@
+.login-form-container {
+    display: flex;
+    flex-direction: column;
+    height: 65vh;
+    width: 50vw;
+    border: solid black 1px;
+}
+
+.form-submitButton {
+    width: 80%;
+    border-radius: 2%;
+    margin: 2%;
+    margin-left: 10%;
+    
+}
+
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    text-align: center;
+    height: 100vh;
+}
+
+.login-form-item {
+    margin: 2%;
+}
