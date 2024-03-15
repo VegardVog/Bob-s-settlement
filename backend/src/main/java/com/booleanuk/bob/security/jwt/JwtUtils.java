@@ -17,11 +17,12 @@ import java.util.Date;
 public class JwtUtils {
     private static final Logger logger = LoggerFactory.getLogger(JwtUtils.class);
 
-    @Value("7ee697880b7387d42ff4ac21ef04336448eb3f40218baa953555edcf6c69170f")
+    @Value("${booleanuk.app.jwtSecret}")
     private String jwtSecret;
 
-    @Value("86400000")
+    @Value("${booleanuk.app.jwtExpirationMs}")
     private int jwtExpirationMs;
+
 
     public String generateJwtToken(Authentication authentication) {
         UserDetailsImpl userPrincipal = (UserDetailsImpl) authentication.getPrincipal();
