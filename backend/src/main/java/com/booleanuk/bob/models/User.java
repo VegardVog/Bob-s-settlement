@@ -1,10 +1,6 @@
 package com.booleanuk.bob.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -12,8 +8,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-@NoArgsConstructor
 @Data
+@NoArgsConstructor
 @Entity
 @Table(name = "users",
         uniqueConstraints = {
@@ -25,23 +21,27 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @NotBlank
-    @Size(max = 20)
+    @Column(nullable = false)
     private String username;
 
-    @NotBlank
-    @Size(max = 50)
-    @Email
+    @Column(nullable = false)
     private String email;
 
-    @NotBlank
-    @Size(max = 120)
+    @Column(nullable = false)
     private String password;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
+    @OneToMany(mappedBy = "owner")
+    private List<Settlement> ownedSettlements;
+
+    @ManyToMany(mappedBy = "participants")
+    private List<Settlement> participateSettlements;
+
+    @OneToMany(mappedBy = "user")
+    private List<Distribution> distributions;
 
     public User(String username, String email, String password) {
         this.username = username;
@@ -49,8 +49,9 @@ public class User {
         this.password = password;
     }
 
-
     public User(int id) {
         this.id = id;
     }
+
+
 }
