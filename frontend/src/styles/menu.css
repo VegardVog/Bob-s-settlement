@@ -1,0 +1,28 @@
+.menu-container {
+    display: flex;
+    flex-direction: row;
+    background-color: royalblue;
+    height: 6vh;
+    width: 100vw;
+    font-size: large;
+    color: white;
+    position: absolute;
+}
+
+
+.menu-ul {
+    display: flex;
+    flex-direction: row;
+    list-style-type: none;
+
+}
+
+.menu-li {
+    margin-left: 5vw;
+    color: white;
+
+}
+
+.menu-li:hover {
+    color: black;
+}
