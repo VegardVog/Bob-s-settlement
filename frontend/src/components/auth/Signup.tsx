@@ -3,13 +3,13 @@ import "../../styles/signup.css";
 import axios from 'axios';
 import { HttpRequestsContext, HttpRequestsTypes } from '../../contextAPI/HttpRequests';
 import { UserContext, UserTypes } from '../../contextAPI/User';
+import { useNavigate } from 'react-router';
 
 const Signup  = () => {
 
 
     const [form, setForm] = useState({
-        firstName: "",
-        lastName: "",
+        username: "",
         email: "",
         password: "",
         role: ["user"],
@@ -22,6 +22,8 @@ const Signup  = () => {
         postUser();
 
     };
+
+    const navigate = useNavigate();
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         const {name, value} = e.target;
@@ -38,13 +40,14 @@ const Signup  = () => {
         const fetchData = async () => {
             try {
                 const response = await axios.post(baseURL + "/auth/signup", {
-                    username: form.firstName + form.lastName,
+                    username: form.username,
                     email: form.email,
                     password: form.password,
                     role: form.role,
                 });
 
-                setLoggedIn(true);
+                setLoggedIn("true");
+                navigate("/")
                 console.log(response);
             } catch (error) {
                 console.error(error);
@@ -60,23 +63,15 @@ const Signup  = () => {
             <form onSubmit={handleSubmit} className='signup-form-container'>
                 <h2>Sign up</h2>
                 <input 
-                    name='firstName'
+                    name='username'
                     type="text"
                     required
-                    placeholder='First Name'
+                    placeholder='Username'
                     className='signup-form-item'
-                    value={form.firstName}
+                    value={form.username}
                     onChange={(e) => {handleChange(e)}}
                     />
-                <input 
-                    name='lastName'
-                    type="text"
-                    required
-                    placeholder='Last Name'
-                    className='signup-form-item'
-                    value={form.lastName}
-                    onChange={(e) => {handleChange(e)}}
-                    />
+     
 
                 <input 
                     name='email'
