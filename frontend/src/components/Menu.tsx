@@ -22,9 +22,14 @@ const Menu = () => {
             </Link><Link to={"/signup"} style={{ textDecoration: 'none' }}>
                 <li className='menu-li'>Signup</li>
             </Link></>
-             : <> <li className='menu-li'>Profile</li>
+             : <> 
+             <Link to={"/profile"} style={{ textDecoration: 'none' }}>
+                <li className='menu-li'>Profile</li>
+             </Link>
              
-             <li className='menu-li'>Settlements</li>
+             <Link to={"/settlements"} style={{ textDecoration: 'none' }}>
+                <li className='menu-li'>Settlements</li>
+             </Link>
              </>}
 
 

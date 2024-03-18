@@ -15,7 +15,6 @@ const Signup  = () => {
         role: ["user"],
     });
 
-    const {setLoggedIn} = useContext(UserContext) as UserTypes; 
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -46,7 +45,6 @@ const Signup  = () => {
                     role: form.role,
                 });
 
-                setLoggedIn("true");
                 navigate("/")
                 console.log(response);
             } catch (error) {

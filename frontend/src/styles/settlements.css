@@ -1,0 +1,16 @@
+.settlements-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+
+}
+
+.settlements-title {
+    display: flex;
+    margin-top: 10vh;
+    border: solid black 1px;
+    justify-content: center;
+    align-items: center;
+    height: 10vh;
+}

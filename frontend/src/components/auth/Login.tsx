@@ -13,7 +13,7 @@ const Login = () =>{
 });
 
 
-const {setLoggedIn, loggedIn} = useContext(UserContext) as UserTypes;
+const {setLoggedIn, setId} = useContext(UserContext) as UserTypes;
 
 const {baseURL} = useContext(HttpRequestsContext) as HttpRequestsTypes; 
 
@@ -38,7 +38,7 @@ const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
             try {
                 const response = await axios.post(baseURL + "/auth/signin", form);
                 setLoggedIn("true");
-                console.log(response)
+                setId(response.data.id);
             } catch (error) {
                 console.error(error);
             }
