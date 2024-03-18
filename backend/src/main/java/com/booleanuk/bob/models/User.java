@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -47,6 +48,9 @@ public class User {
         this.username = username;
         this.email = email;
         this.password = password;
+        this.ownedSettlements = new ArrayList<>();
+        this.participateSettlements = new ArrayList<>();
+        this.distributions = new ArrayList<>();
     }
 
     public User(int id) {
