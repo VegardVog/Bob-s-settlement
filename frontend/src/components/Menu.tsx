@@ -8,10 +8,7 @@ const Menu = () => {
 
     const {loggedIn} = useContext(UserContext) as UserTypes;
 
-    useEffect(() => {
-        console.log(loggedIn);
 
-    }, [loggedIn]);
   return (
     <div className='menu-container'>
         <ul className='menu-ul'>
@@ -25,7 +22,10 @@ const Menu = () => {
             </Link><Link to={"/signup"} style={{ textDecoration: 'none' }}>
                 <li className='menu-li'>Signup</li>
             </Link></>
-             : <></>}
+             : <> <li className='menu-li'>Profile</li>
+             
+             <li className='menu-li'>Settlements</li>
+             </>}
 
 
         </ul>
