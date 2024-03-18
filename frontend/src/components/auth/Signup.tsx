@@ -1,5 +1,8 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, useContext, useState } from 'react';
 import "../../styles/signup.css";
+import axios from 'axios';
+import { HttpRequestsContext, HttpRequestsTypes } from '../../contextAPI/HttpRequests';
+import { UserContext, UserTypes } from '../../contextAPI/User';
 
 const Signup  = () => {
 
@@ -9,11 +12,14 @@ const Signup  = () => {
         lastName: "",
         email: "",
         password: "",
+        role: ["user"],
     });
+
+    const {setLoggedIn} = useContext(UserContext) as UserTypes; 
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-
+        postUser();
 
     };
 
@@ -25,6 +31,29 @@ const Signup  = () => {
             [name]: value
         })
     };
+
+    const {baseURL} = useContext(HttpRequestsContext) as HttpRequestsTypes;
+
+    const postUser = () => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.post(baseURL + "/auth/signup", {
+                    username: form.firstName + form.lastName,
+                    email: form.email,
+                    password: form.password,
+                    role: form.role,
+                });
+
+                setLoggedIn(true);
+                console.log(response);
+            } catch (error) {
+                console.error(error);
+            }
+        }
+        fetchData();
+    }
+
+
 
     return (
         <div className='signup-container'>
