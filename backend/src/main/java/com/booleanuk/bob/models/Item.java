@@ -43,4 +43,8 @@ public class Item {
         this.settlement = settlement;
         this.distributions = new ArrayList<>();
     }
+    public Item(String name, double price) {
+        this.name = name;
+        this.price = price;
+    }
 }

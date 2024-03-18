@@ -50,6 +50,7 @@ public class SettlementController {
         if(settlementToSettle.isSettled()) {
             throw new CustomParamaterConstraintException("Settlement is already settled");
         } else {
+            settlementToSettle.setSettled(true);
             return ResponseEntity.ok(new SuccessResponse(settlementToSettle));
         }
     }

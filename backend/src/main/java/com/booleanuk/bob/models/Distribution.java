@@ -33,4 +33,7 @@ public class Distribution {
         this.item = item;
         this.user = user;
     }
+    public Distribution(double percent) {
+        this.percent = percent;
+    }
 }
