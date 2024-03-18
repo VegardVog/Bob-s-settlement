@@ -2,8 +2,8 @@ import { ReactNode, createContext, useState } from 'react';
 
 
 interface UserTypes {
-    loggedIn: boolean;
-    setLoggedIn:  React.Dispatch<React.SetStateAction<boolean>>;
+    loggedIn: string;
+    setLoggedIn: (value: string) => void;
 }
 
 interface UserProviderProps {
@@ -11,15 +11,21 @@ interface UserProviderProps {
   }
 
   const initialUserState: UserTypes = {
-    loggedIn: false,
+    loggedIn: sessionStorage.getItem("loggedIn") || "false",
     setLoggedIn: () => {}, 
   };
 
 const UserContext = createContext<UserTypes | undefined>(initialUserState);
 
 const UserProvider: React.FC<UserProviderProps> = ({children}) => {
-    const [loggedIn, setLoggedIn] = useState<boolean>(false);
+    const [loggedIn, setLoggedInState] = useState<string>(initialUserState.loggedIn);
 
+
+    //Use setLoggedIn to sate loggedIn state in both session storage and context API
+    const setLoggedIn = (value: string) => {
+        sessionStorage.setItem("loggedIn", value);
+        setLoggedInState(value);
+    }
     return (
 
     <UserContext.Provider
