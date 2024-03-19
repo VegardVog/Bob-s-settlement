@@ -6,8 +6,12 @@ import { UserContext, UserTypes } from '../contextAPI/User';
 const Menu = () => {
 
 
-    const {loggedIn} = useContext(UserContext) as UserTypes;
+    const {loggedIn, setLoggedIn} = useContext(UserContext) as UserTypes;
 
+
+    const handleLogout = () => {
+        setLoggedIn("false");
+    };
 
   return (
     <div className='menu-container'>
@@ -29,6 +33,9 @@ const Menu = () => {
              
              <Link to={"/settlements"} style={{ textDecoration: 'none' }}>
                 <li className='menu-li'>Settlements</li>
+             </Link>
+             <Link to={"/"} style={{ textDecoration: 'none' }}>
+                <li className='menu-li' onClick={handleLogout}>Logout</li>
              </Link>
              </>}
 
