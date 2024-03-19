@@ -50,14 +50,15 @@ const Profile = () => {
     const putUser = () => {
         const fetchData = async () => {
             try {
-                const response = await axios.put(baseURL + "/users", {
+                console.log(form);
+                const response = await axios.put(baseURL + `/users/${id}`, {
                     username: form.username,
                     email: form.email,
                     password: form.password,
                 });
-
-                navigate("/")
                 console.log(response);
+                navigate("/")
+             
             } catch (error) {
                 console.error(error);
             }
