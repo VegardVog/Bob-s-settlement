@@ -59,8 +59,9 @@ public class WebSecurityConfig {
                 .exceptionHandling((exception) -> exception.authenticationEntryPoint(unauthorizedHandler))
                 .sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/auth/**").permitAll()
+                        .requestMatchers("/auth/**", "/users/**").permitAll()
                         .requestMatchers("/**").hasRole("ADMIN")
+
 
                 );
         http.authenticationProvider(authenticationProvider());

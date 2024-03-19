@@ -10,10 +10,12 @@ import com.booleanuk.bob.repository.DistributionRepository;
 import com.booleanuk.bob.repository.ItemRepository;
 import com.booleanuk.bob.repository.SettlementRepository;
 import com.booleanuk.bob.repository.UserRepository;
+import com.booleanuk.bob.response.MessageResponse;
 import com.booleanuk.bob.response.SettlementDTO;
 import com.booleanuk.bob.response.SuccessResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -32,6 +34,8 @@ public class UserController {
     private ItemRepository itemRepository;
     @Autowired
     private DistributionRepository distributionRepository;
+    @Autowired
+    PasswordEncoder encoder;
 
     @GetMapping
     public ResponseEntity<?> getAllUsers() {
@@ -43,6 +47,23 @@ public class UserController {
         User user = this.userRepository.findById(id)
                 .orElseThrow(() -> new CustomDataNotFoundException("User not found"));
         return ResponseEntity.ok(new SuccessResponse(user));
+    }
+
+    @PutMapping("{id}")
+    public ResponseEntity<?> updateUser(@PathVariable int id, @RequestBody User user) {
+        User userToUpdate = userRepository.findById(id)
+                .orElseThrow(() -> new CustomDataNotFoundException("User not found"));
+
+        if(userRepository.existsByEmail(user.getEmail())) {
+            return ResponseEntity.badRequest().body(new MessageResponse("Error: Username is already taken"));
+        }
+        if (userRepository.existsByUsername(user.getUsername())) {
+            return ResponseEntity.badRequest().body(new MessageResponse("Error: Username is already in use!"));
+        }
+        userToUpdate.setEmail(user.getEmail());
+        userToUpdate.setUsername(user.getUsername());
+        userToUpdate.setPassword(encoder.encode(user.getPassword()));
+        return ResponseEntity.ok(new SuccessResponse(userToUpdate));
     }
 
     @GetMapping("/{id}/settlements")
@@ -120,6 +141,32 @@ public class UserController {
             distributionRepository.save(distribution);
         }
         return ResponseEntity.ok(new SuccessResponse("Item created successfully"));
+    }
+
+    @DeleteMapping("/{userId}/settlements/{settlementId}/items/{itemId}")
+    public ResponseEntity<Item> deleteItemFromSettlement(@PathVariable int userId, @PathVariable int settlementId, @PathVariable int itemId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new CustomDataNotFoundException("User was not found"));
+        Settlement settlement = settlementRepository.findById(settlementId)
+                .orElseThrow(() -> new CustomDataNotFoundException("Settlement was not found"));
+        Item item = itemRepository.findById(itemId)
+                .orElseThrow(() -> new CustomDataNotFoundException("Item was not found"));
+
+        if (!settlement.getItems().contains(item)) {
+            throw new CustomParamaterConstraintException("Item is not part of settlement");
+        }
+
+
+        // delete distributions associated with item
+        List<Distribution> distributions = distributionRepository.findByItem(item);
+        distributionRepository.deleteAll(distributions);
+        // Remove the item from the settlement
+        settlement.getItems().remove(item);
+        settlementRepository.save(settlement);
+        // delete the item
+        itemRepository.delete(item);
+
+        return ResponseEntity.ok().body(item);
     }
 
     @PutMapping("/{userId}/settlements/{settlementId}/{itemId}")

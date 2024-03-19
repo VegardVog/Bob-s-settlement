@@ -35,7 +35,7 @@ public class Settlement {
     private List<User> participants;
 
     @OneToMany(mappedBy = "settlement")
-    @JsonIncludeProperties({"id", "name", "price", "addedBy"})
+    @JsonIncludeProperties({"id", "name", "price"})
     private List<Item> items;
 
     public Settlement(String name, User owner) {

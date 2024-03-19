@@ -2,6 +2,7 @@ package com.booleanuk.bob.response;
 
 import com.booleanuk.bob.models.Item;
 import com.booleanuk.bob.models.User;
+import com.fasterxml.jackson.annotation.JsonIncludeProperties;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -15,7 +16,9 @@ public class SettlementDTO {
     private Integer id;
     private String name;
     private UserDTO owner;
+    @JsonIncludeProperties({"id", "username", "email"})
     private List<UserDTO> participants;
+    @JsonIncludeProperties({"id", "name", "price"})
     private List<Item> items;
     private boolean settled;
 
