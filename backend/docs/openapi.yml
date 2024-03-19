@@ -462,3 +462,8 @@ components:
       properties:
         message:
           type: string
+    Error:
+      type: object
+      properties:
+        message:
+          type: string

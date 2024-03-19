@@ -15,7 +15,6 @@ const Signup  = () => {
         role: ["user"],
     });
 
-    const {setLoggedIn} = useContext(UserContext) as UserTypes; 
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -46,7 +45,6 @@ const Signup  = () => {
                     role: form.role,
                 });
 
-                setLoggedIn("true");
                 navigate("/")
                 console.log(response);
             } catch (error) {
@@ -62,6 +60,8 @@ const Signup  = () => {
         <div className='signup-container'>
             <form onSubmit={handleSubmit} className='signup-form-container'>
                 <h2>Sign up</h2>
+
+                <label htmlFor='username'><h3>Username</h3></label>
                 <input 
                     name='username'
                     type="text"
@@ -72,10 +72,10 @@ const Signup  = () => {
                     onChange={(e) => {handleChange(e)}}
                     />
      
-
+                <label htmlFor='email'><h3>Email</h3></label>
                 <input 
                     name='email'
-                    type="text"
+                    type="email"
                     required
                     placeholder='Email'
                     className='signup-form-item'
@@ -83,9 +83,10 @@ const Signup  = () => {
                     onChange={(e) => {handleChange(e)}}
                     />
 
+                <label htmlFor='password'><h3>Password</h3></label>
                 <input 
                     name='password'
-                    type="text"
+                    type="password"
                     required
                     placeholder='Password'
                     className='signup-form-item'

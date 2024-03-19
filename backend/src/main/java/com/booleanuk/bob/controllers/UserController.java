@@ -10,6 +10,7 @@ import com.booleanuk.bob.repository.DistributionRepository;
 import com.booleanuk.bob.repository.ItemRepository;
 import com.booleanuk.bob.repository.SettlementRepository;
 import com.booleanuk.bob.repository.UserRepository;
+import com.booleanuk.bob.request.UpdateUserRequest;
 import com.booleanuk.bob.response.MessageResponse;
 import com.booleanuk.bob.response.SettlementDTO;
 import com.booleanuk.bob.response.SuccessResponse;
@@ -18,11 +19,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("users")
 public class UserController {
@@ -50,16 +53,18 @@ public class UserController {
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<?> updateUser(@PathVariable int id, @RequestBody User user) {
+    public ResponseEntity<?> updateUser(@Valid @PathVariable int id, @RequestBody UpdateUserRequest user) {
         User userToUpdate = userRepository.findById(id)
                 .orElseThrow(() -> new CustomDataNotFoundException("User not found"));
 
-        if(userRepository.existsByEmail(user.getEmail())) {
-            return ResponseEntity.badRequest().body(new MessageResponse("Error: Username is already taken"));
+
+        if(userRepository.existsByEmail(user.getEmail()) && !userToUpdate.getEmail().equalsIgnoreCase(user.getEmail())) {
+            return ResponseEntity.badRequest().body(new MessageResponse("Error: Email is already taken"));
         }
-        if (userRepository.existsByUsername(user.getUsername())) {
+        if (userRepository.existsByUsername(user.getUsername()) && !userToUpdate.getUsername().equalsIgnoreCase(user.getUsername())) {
             return ResponseEntity.badRequest().body(new MessageResponse("Error: Username is already in use!"));
         }
+
         userToUpdate.setEmail(user.getEmail());
         userToUpdate.setUsername(user.getUsername());
         userToUpdate.setPassword(encoder.encode(user.getPassword()));
