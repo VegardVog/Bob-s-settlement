@@ -1,5 +1,6 @@
 package com.booleanuk.bob.models;
 
+import com.fasterxml.jackson.annotation.JsonIncludeProperties;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,6 +25,7 @@ public class Item {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
+    @JsonIncludeProperties({"id", "username", "email"})
     private User addedBy;
 
     @ManyToOne

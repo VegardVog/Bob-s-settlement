@@ -50,12 +50,11 @@ public class UserController {
         User user = this.userRepository.findById(id)
                 .orElseThrow(() -> new CustomDataNotFoundException("User not found"));
 
-        List<Settlement> settlements = user.getParticipateSettlements();
+        List<Settlement> settlements = settlementRepository.findByParticipantsContainsAndIsSettled(user, false);
 
-        // Use a Set to store unique settlement IDs
         Set<Integer> uniqueSettlementIds = new HashSet<>();
 
-        // Transform the settlements to a simplified DTO format
+        // transforms from List<Settlement> to List<SettlementDTO>
         List<SettlementDTO> settlementDTOs = new ArrayList<>();
         for (Settlement settlement : settlements) {
             if (!uniqueSettlementIds.contains(settlement.getId())) {
@@ -71,6 +70,14 @@ public class UserController {
         }
 
         return ResponseEntity.ok(new SuccessResponse(settlementDTOs));
+    }
+
+    @GetMapping("{id}/settlements/history")
+    public ResponseEntity<List<Settlement>> getHistoryForUser(@PathVariable int id) {
+        User user = this.userRepository.findById(id)
+                .orElseThrow(() -> new CustomDataNotFoundException("User not found"));
+        List<Settlement> settlements = settlementRepository.findByParticipantsContainsAndIsSettled(user, true);
+        return ResponseEntity.ok().body(settlements);
     }
 
     @GetMapping("/{id}/owned")

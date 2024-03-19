@@ -1,6 +1,7 @@
 package com.booleanuk.bob.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIncludeProperties;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -46,6 +47,7 @@ public class User {
     private List<Settlement> participateSettlements;
 
     @OneToMany(mappedBy = "user")
+    @JsonIncludeProperties({"id", "percent", "item"})
     private List<Distribution> distributions;
 
     public User(String username, String email, String password) {

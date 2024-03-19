@@ -1,5 +1,6 @@
 package com.booleanuk.bob.models;
 
+import com.fasterxml.jackson.annotation.JsonIncludeProperties;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,6 +19,7 @@ public class Distribution {
 
     @ManyToOne
     @JoinColumn(name = "item_id", nullable = false)
+    @JsonIncludeProperties({"id", "name", "price", "addedBy", "settlement"})
     private Item item;
 
     @ManyToOne
