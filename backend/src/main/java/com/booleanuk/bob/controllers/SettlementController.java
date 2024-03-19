@@ -50,6 +50,7 @@ public class SettlementController {
         if(settlementToSettle.isSettled()) {
             throw new CustomParamaterConstraintException("Settlement is already settled");
         } else {
+            settlementToSettle.setSettled(true);
             return ResponseEntity.ok(new SuccessResponse(settlementToSettle));
         }
     }
@@ -60,7 +61,11 @@ public class SettlementController {
                 .orElseThrow(() -> new CustomDataNotFoundException("Settlement not found"));
         User user = this.userRepository.findById(userId)
                 .orElseThrow(() -> new CustomDataNotFoundException("User not found"));
+        if(settlement.getParticipants().contains(user)) {
+            throw new CustomParamaterConstraintException(settlement.getName() + " contains " + user.getUsername());
+        }
         settlement.getParticipants().add(user);
+        settlementRepository.save(settlement);
         return ResponseEntity.ok(new SuccessResponse(settlement.getParticipants()));
     }
 
