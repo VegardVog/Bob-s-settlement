@@ -15,6 +15,7 @@ import com.booleanuk.bob.security.jwt.JwtUtils;
 import com.booleanuk.bob.security.services.UserDetailsImpl;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -23,6 +24,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -54,7 +58,14 @@ public class AuthController {
     Inserts inserts;
 
     @PostMapping("/signin")
-    public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
+    public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest,  @CookieValue(name = "jwtToken", required = false) String jwtToken) {
+        // Check if JWT token exists in the cookie
+        if (jwtToken != null && !jwtToken.isEmpty()) {
+            // Token exists
+            return ResponseEntity.ok(new MessageResponse("Token exists in cookie"));
+        }
+
+
         // If using a salt for password use it here
         Authentication authentication = authenticationManager
                 .authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
@@ -64,8 +75,17 @@ public class AuthController {
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
         List<String> roles = userDetails.getAuthorities().stream().map((item) -> item.getAuthority())
                 .collect(Collectors.toList());
+
+
+        //Http only cookie for jwt token
+        HttpHeaders headers = new HttpHeaders();
+        headers.add(HttpHeaders.SET_COOKIE, "jwtToken=" + jwt + "; HttpOnly; Max-Age=86400; Path=/");
+
+
         return ResponseEntity
-                .ok(new JwtResponse(jwt, userDetails.getId(), userDetails.getUsername(), userDetails.getEmail(), roles));
+                .ok()
+                .headers(headers)
+                .body(new JwtResponse(userDetails.getId(), userDetails.getUsername(), userDetails.getEmail(), roles));
     }
 
     @PostMapping("/signup")
@@ -109,6 +129,7 @@ public class AuthController {
         }
         user.setRoles(roles);
         userRepository.save(user);
+
         return ResponseEntity.ok((new MessageResponse("User registered successfully")));
     }
 }

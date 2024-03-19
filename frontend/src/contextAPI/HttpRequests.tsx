@@ -14,7 +14,7 @@ interface HttpRequestsProviderProps {
 const HttpRequestsContext = createContext<HttpRequestsTypes | undefined>(undefined);
 
 const HttpRequestsProvider: React.FC<HttpRequestsProviderProps> = ({children}) => {
-    const baseURL: string = "";
+    const baseURL: string = "http://localhost:4000";
 
     return (
 
@@ -30,4 +30,5 @@ const HttpRequestsProvider: React.FC<HttpRequestsProviderProps> = ({children}) =
 }
 
 
-export {HttpRequestsContext, HttpRequestsProvider}
+export { HttpRequestsContext, HttpRequestsProvider };
+export type { HttpRequestsTypes };
