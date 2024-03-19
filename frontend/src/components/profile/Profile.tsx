@@ -81,40 +81,44 @@ const Profile = () => {
         <div className='settlements-title'>
             <h1>Profile</h1>
         </div>
-
-        <form>
-        <input 
-                    name='username'
-                    type="text"
-                    required
-                    placeholder='Username'
-                    className='signup-form-item'
-                    value={form.username}
-                    onChange={(e) => {handleChange(e)}}
-                    />
-     
-
+        <div className='profile-form-container'>
+            <form onSubmit={handleSubmit} className='profile-form'>
+                <label htmlFor='username'><h3>Username</h3></label>
                 <input 
-                    name='email'
-                    type="text"
-                    required
-                    placeholder='Email'
-                    className='signup-form-item'
-                    value={form.email}
-                    onChange={(e) => {handleChange(e)}}
-                    />
+                        name='username'
+                        type="text"
+                        required
+                        placeholder='Username'
+                        className='signup-form-item'
+                        value={form.username}
+                        onChange={(e) => {handleChange(e)}}
+                        />
+        
+        <label htmlFor='email'><h3>Email</h3></label>
+                    <input 
+                        name='email'
+                        type="email"
+                        required
+                        placeholder='Email'
+                        className='signup-form-item'
+                        value={form.email}
+                        onChange={(e) => {handleChange(e)}}
+                        />
 
-                <input 
-                    name='password'
-                    type="text"
-                    required
-                    placeholder='Password'
-                    className='signup-form-item'
-                    value={form.password}
-                    onChange={(e) => {handleChange(e)}}
-                    />
-            <button type='submit'>Update profile</button>
-        </form>
+                <label htmlFor='password'><h3>Password</h3></label>
+                    <input 
+                        name='password'
+                        type="password"
+                        required
+                        placeholder='Password'
+                        className='signup-form-item'
+                        value={form.password}
+                        onChange={(e) => {handleChange(e)}}
+                        />
+                <button type='submit' className='form-submitButton'>Update profile</button>
+            </form>
+        </div>
+
     </div>
   )
 }

@@ -3,6 +3,7 @@ import "../../styles/login.css";
 import axios from 'axios';
 import { UserContext, UserTypes } from '../../contextAPI/User';
 import { HttpRequestsContext, HttpRequestsTypes } from '../../contextAPI/HttpRequests';
+import { useNavigate } from 'react-router-dom';
 
 
 const Login = () =>{
@@ -12,6 +13,7 @@ const Login = () =>{
     password: "",
 });
 
+const navigate = useNavigate();
 
 const {setLoggedIn, setId} = useContext(UserContext) as UserTypes;
 
@@ -39,6 +41,8 @@ const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
                 const response = await axios.post(baseURL + "/auth/signin", form);
                 setLoggedIn("true");
                 setId(response.data.id);
+                console.log(response);
+                navigate("/");
             } catch (error) {
                 console.error(error);
             }
@@ -53,6 +57,8 @@ const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
       <div className='login-container'>
       <form onSubmit={handleSubmit} className='login-form-container'>
           <h2>Login</h2>
+
+          <label htmlFor='username'><h3>Username</h3></label>
           <input 
               name='username'
               type="text"
@@ -63,9 +69,10 @@ const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
               onChange={(e) => {handleChange(e)}}
               />
 
+            <label htmlFor='password'><h3>Password</h3></label>
           <input 
               name='password'
-              type="text"
+              type="password"
               required
               placeholder='Password'
               className='login-form-item'
