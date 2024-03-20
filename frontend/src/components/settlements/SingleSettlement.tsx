@@ -10,11 +10,13 @@ import RemoveUser from './RemoveUser';
 
 interface PropTypes {
     settlement: Settlement;
+    settlements: Settlement[];
+    setSettlements: Function;
 }
 
 const SingleSettlement = (props: PropTypes) => {
 
-    const {settlement} = props ?? {};
+    const {settlement, settlements, setSettlements} = props ?? {};
 
     const {loggedIn} = useContext(UserContext) as UserTypes;
 
@@ -24,7 +26,7 @@ const SingleSettlement = (props: PropTypes) => {
         <div >
             <h1>Title: {settlement.name}</h1>
         </div>
-        <AddUser settlement={settlement}/>
+        <AddUser settlement={settlement} settlements={settlements} setSettlements={setSettlements}/>
         <RemoveUser settlement={settlement}/>
     </div>
   )

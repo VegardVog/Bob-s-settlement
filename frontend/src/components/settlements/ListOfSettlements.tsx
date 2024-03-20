@@ -52,7 +52,7 @@ const ListOfSettlements = (props: {settlements: Settlement[], setSettlements: Fu
     </div>
     <div>
         {settlements.map((settlement: Settlement, index: React.Key | null | undefined) => {
-           return <li key={index} className='settlement-list-item'><SingleSettlement settlement={settlement}/></li>
+           return <li key={index} className='settlement-list-item'><SingleSettlement settlement={settlement} setSettlements={setSettlements} settlements={settlements}/></li>
         })
             
         }
