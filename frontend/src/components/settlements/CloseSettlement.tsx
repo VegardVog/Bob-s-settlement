@@ -51,6 +51,7 @@ const CloseSettlement = (props: {
   }, [goingToSettle]);
 
   const closeSettlement = () => {
+
     if (
       window.confirm(
         `Are you sure you want to settle ${props.settlement.name}?`
@@ -64,7 +65,7 @@ const CloseSettlement = (props: {
     <div className="closeSettlement-container">
       <button
         className="closeButton"
-        onClick={(e) => closeSettlement}
+        onClick={closeSettlement}
         disabled={!isOwner}
       >
         Settle
