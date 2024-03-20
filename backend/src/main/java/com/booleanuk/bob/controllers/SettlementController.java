@@ -44,7 +44,7 @@ public class SettlementController {
         return new ResponseEntity<>(settlementRepository.save(settlementToUpdate), HttpStatus.CREATED);
     }
 
-    @PutMapping("/{id}/settle")
+    @GetMapping("/{id}/settle")
     public ResponseEntity<?> settleSettlement(@PathVariable int id) {
         Settlement settlementToSettle = this.settlementRepository.findById(id)
                 .orElseThrow(() -> new CustomDataNotFoundException("Settlement not found"));
@@ -52,7 +52,7 @@ public class SettlementController {
             throw new CustomParamaterConstraintException("Settlement is already settled");
         } else {
             settlementToSettle.setSettled(true);
-            return ResponseEntity.ok(new SuccessResponse(settlementToSettle));
+            return ResponseEntity.ok(new SuccessResponse(settlementRepository.save(settlementToSettle)));
         }
     }
 
