@@ -5,27 +5,25 @@ import "../../styles/settlements/listOfSettlements.css";
 import axios from 'axios';
 import { HttpRequestsContext, HttpRequestsTypes } from '../../contextAPI/HttpRequests';
 import SingleSettlement from './SingleSettlement';
+import {Settlement} from "../../types/SettlementTypes";
 
-const ListOfSettlements = () => {
+const ListOfSettlements = (props: {settlements: Settlement[], setSettlements: Function}) => {
 
 
     const {loggedIn} = useContext(UserContext) as UserTypes;
 
     const {id} = useContext(UserContext) as UserTypes;
 
+    const {baseURL} = useContext(HttpRequestsContext) as HttpRequestsTypes;
 
-
-
-    const [settlements, setSettlements] = useState([]);
-
+    const {settlements, setSettlements} = props ?? {};
 
     useEffect(() => {
         getSettlementsFromUser();
-    }, [settlements]);
+    }, []);
 
 
     
-    const {baseURL} = useContext(HttpRequestsContext) as HttpRequestsTypes;
 
     const getSettlementsFromUser = () => {
         const fetchData = async () => {
@@ -53,7 +51,7 @@ const ListOfSettlements = () => {
     
     </div>
     <div>
-        {settlements.map((settlement, index) => {
+        {settlements.map((settlement: Settlement, index: React.Key | null | undefined) => {
            return <li key={index} className='settlement-list-item'><SingleSettlement settlement={settlement}/></li>
         })
             

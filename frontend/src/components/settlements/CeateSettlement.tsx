@@ -4,8 +4,9 @@ import { UserContext, UserTypes } from '../../contextAPI/User';
 import "../../styles/settlements/addUser.css";
 import axios from 'axios';
 import { HttpRequestsContext, HttpRequestsTypes } from '../../contextAPI/HttpRequests';
+import { Settlement } from '../../types/SettlementTypes';
 
-const CreateSettlement = () => {
+const CreateSettlement = (props: {settlements: Settlement[], setSettlements: Function}) => {
 
 
     const {loggedIn} = useContext(UserContext) as UserTypes;
@@ -14,9 +15,14 @@ const CreateSettlement = () => {
 
     const {baseURL} = useContext(HttpRequestsContext) as HttpRequestsTypes;
 
+
+    const {setSettlements, settlements} = props ?? {};
+
+
     const [form, setForm] = useState({
         name: "",
     });
+
 
 
     const createSettlement = () => {
@@ -25,7 +31,7 @@ const CreateSettlement = () => {
             try {
                 const response = await axios.post(baseURL + `/users/${id}/settlements`, form);
                 console.log(response);
-
+                setSettlements([...settlements, response.data.data]);
                 setForm({...form, name: ""});
 
             } catch (error) {

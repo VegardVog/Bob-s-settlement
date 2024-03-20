@@ -2,16 +2,8 @@ import React, { useContext, useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import { UserContext, UserTypes } from '../../contextAPI/User';
 import "../../styles/settlements/singleSettlement.css"
+import {Settlement} from "../../types/SettlementTypes";
 
-
-
-interface Settlement {
-    id: number;
-    name: string;
-    settled: boolean;
-    owner: object;
-    participants: [object];
-}
 
 
 interface PropTypes {
