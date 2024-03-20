@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { UserContext, UserTypes } from '../../contextAPI/User';
 import "../../styles/settlements/singleSettlement.css"
 import {Settlement} from "../../types/SettlementTypes";
+import AddUser from './AddUser';
+import RemoveUser from './RemoveUser';
 
 
 
@@ -20,9 +22,10 @@ const SingleSettlement = (props: PropTypes) => {
   return (
     <div >
         <div >
-            <h1 >Settlements SingleSettlement</h1>
+            <h1>Title: {settlement.name}</h1>
         </div>
-        {settlement.name}
+        <AddUser settlement={settlement}/>
+        <RemoveUser settlement={settlement}/>
     </div>
   )
 }

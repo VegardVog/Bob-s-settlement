@@ -2,8 +2,9 @@ import React, { useContext, useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import { UserContext, UserTypes } from '../../contextAPI/User';
 import "../../styles/settlements/removeUser.css";
+import { Settlement } from '../../types/SettlementTypes';
 
-const RemoveUser = () => {
+const RemoveUser = (props:{settlement: Settlement}) => {
 
 
     const {loggedIn} = useContext(UserContext) as UserTypes;
