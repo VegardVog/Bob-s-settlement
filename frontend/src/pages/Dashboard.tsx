@@ -1,19 +1,12 @@
-import React from 'react'
-import Menu from '../components/Menu';
-import "../styles/dashboard.css"
+import React from "react";
+import "../styles/dashboard.css";
 
 const Dashboard = () => {
-    return (
-
-        <div className='dashboard-container'>
-          <div className='dashboard-title'>
-            <h1 >Dashboard Title</h1>
-
-          </div>
-        </div>
-      
-    )
-
-}
+  return (
+    <div className="dashboard-container">
+      <div className="dashboard-title"></div>
+    </div>
+  );
+};
 
 export default Dashboard;

@@ -113,6 +113,13 @@ public class UserController {
         return ResponseEntity.ok(new SuccessResponse(user.getOwnedSettlements()));
     }
 
+    @GetMapping("/{id}/distributions")
+    public ResponseEntity<?> getDistributions(@PathVariable int id) {
+        User user = this.userRepository.findById(id)
+                .orElseThrow(() -> new CustomDataNotFoundException("User not found"));
+        return ResponseEntity.ok(new SuccessResponse(user.getDistributions()));
+    }
+
     @PostMapping("/{id}/settlements")
     public ResponseEntity<?> createSettlement(@RequestBody Settlement settlement, @PathVariable int id) {
         User user = this.userRepository.findById(id)

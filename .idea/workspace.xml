@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="30d27366-d0dc-477d-bc2f-d1828dbfd475" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../JavaProjects/Beginner-project/src/main/java/com/booleanuk/Film.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../JavaProjects/Beginner-project/src/main/java/com/booleanuk/Person.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../JavaProjects/ObjekterDag4/src/main/java/com/booleanuk/Book.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../JavaProjects/moreJPA/src/main/java/com/booleanuk/moreJPA/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../JavaProjects/moreJPA/src/main/java/com/booleanuk/moreJPA/controller/DepartmentController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../JavaProjects/moreJPA/src/main/java/com/booleanuk/moreJPA/controller/EmployeeController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../JavaProjects/moreJPA/src/main/java/com/booleanuk/moreJPA/model/Department.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../JavaProjects/moreJPA/src/main/java/com/booleanuk/moreJPA/model/Employee.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../JavaProjects/moreJPA/src/main/java/com/booleanuk/moreJPA/repository/DepartmentRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../JavaProjects/moreJPA/src/main/java/com/booleanuk/moreJPA/repository/EmployeeRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../JavaProjects/moreJPA/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
+  <component name="ProjectId" id="2dicenQpjjH0y8Jdiu5i3GcVhco" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/ESolha/Documents/Boolean-course/Final-Project/backend"
+  }
+}]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="jdk-17.0.9-corretto-17.0.9-f644763e9732-ebaef533" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="30d27366-d0dc-477d-bc2f-d1828dbfd475" name="Changes" comment="" />
+      <created>1710494436546</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1710494436546</updated>
+    </task>
+    <servers />
+  </component>
+</project>
