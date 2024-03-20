@@ -27,24 +27,25 @@ const CloseSettlement = (props: {
         const response = await axios.get(
           `${baseURL}/settlements/${props.settlement.id}/settle`
         );
+        props.setSettlements(
+          props.settlements.map((s) =>
+            s.id === props.settlement.id
+              ? {
+                  ...s,
+                  settled: true,
+                }
+              : s
+          )
+        );
 
         console.log("Settlement settled successfully:", response.data);
       } catch (error) {
         console.error("Error settling settlement:", error);
       }
     };
-    props.setSettlements(
-      props.settlements.map((s) =>
-        s.id === props.settlement.id
-          ? {
-              ...s,
-              settled: true,
-            }
-          : s
-      )
-    );
     // checks if user is logged in before fetch
     if (loggedIn === "true" && goingToSettle) {
+      
       setSettled();
     }
   }, [goingToSettle]);
@@ -58,11 +59,12 @@ const CloseSettlement = (props: {
       setGoingToSettle(true);
     }
   };
+  
   return (
     <div className="closeSettlement-container">
       <button
         className="closeButton"
-        onClick={closeSettlement}
+        onClick={(e) => closeSettlement}
         disabled={!isOwner}
       >
         Settle
