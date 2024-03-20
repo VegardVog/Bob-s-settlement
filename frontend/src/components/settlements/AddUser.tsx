@@ -55,7 +55,7 @@ const AddUser = (props:{settlement: Settlement, setSettlements: Function, settle
         setFilteredUsers(users.filter(user =>
             !settlement.participants.some(participant => participant.id === user.id)
           ));        
-          console.log(settlement);
+        console.log(settlement);
         console.log(filteredUsers)
         
     };
