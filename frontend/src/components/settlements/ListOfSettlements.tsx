@@ -59,22 +59,17 @@ const ListOfSettlements = (props: {
     <>
       <div className="settlements-title">
         <h1>Settlements ListOfSettlements</h1>
-      </div>
-      <div>
-        {filteredSettlements.map(
-          (settlement: Settlement, index: React.Key | null | undefined) => {
-            return (
-              <li key={index} className="settlement-list-item">
-                <SingleSettlement
-                  settlement={settlement}
-                  setSettlements={setSettlements}
-                  settlements={settlements}
-                />
-              </li>
-            );
-          }
-        )}
-      </div>
+    
+    </div>
+    <div>
+        {filteredSettlements.map((settlement: Settlement, index: React.Key | null | undefined) => {
+           return <li key={index} className='settlement-list-item'><SingleSettlement settlement={settlement} setSettlements={setSettlements} settlements={settlements}/></li>
+        })
+            
+        }
+
+    </div>
+          
     </>
   );
 };
