@@ -13,13 +13,17 @@ import DistributionList from "./Distributions/DistributionList";
 const Dashboard = () => {
   const { loggedIn } = useContext(UserContext) as UserTypes;
   const [userData, setUserData] = useState<any>(null);
+  let userId: string | null = null;
+  if (loggedIn) {
+    userId = sessionStorage.getItem("id");
+  }
 
   const { baseURL } = useContext(HttpRequestsContext) as HttpRequestsTypes;
 
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await axios.get(baseURL + "/users/8");
+        const response = await axios.get(`${baseURL}/users/${userId}`);
         setUserData(response.data.data); // assumes fetch ok
       } catch (error) {
         console.error("Error fetching user data:", error);
