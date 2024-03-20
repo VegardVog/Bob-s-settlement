@@ -118,7 +118,6 @@ public class UserController {
         User user = this.userRepository.findById(id)
                 .orElseThrow(() -> new CustomDataNotFoundException("User not found"));
         Settlement createdSettlement = new Settlement(settlement.getName(), user);
-        createdSettlement.getParticipants().add(user);
         createdSettlement.setOwner(user);
         if(createdSettlement.getName().isEmpty()) {
             throw new CustomParamaterConstraintException("Name was null");

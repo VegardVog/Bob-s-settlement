@@ -65,6 +65,8 @@ public class SettlementController {
         if(settlement.getParticipants().contains(user)) {
             throw new CustomParamaterConstraintException(settlement.getName() + " contains " + user.getUsername());
         }
+
+
         settlement.getParticipants().add(user);
         settlementRepository.save(settlement);
         return ResponseEntity.ok(new SuccessResponse(settlement.getParticipants()));
