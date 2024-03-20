@@ -29,10 +29,20 @@ const SettlementItem: React.FC<SettlementProps> = ({ settlement }) => {
         <h4>{settlement.name}</h4>
       </div>
       <div>
-        <p>Participants: {settlement.participants.length}</p>
-        <p>Owner: {settlement.owner.username}</p>
-        <p>Items: {settlement.items.length}</p>
-        {!settlement.settled && <p>Active</p>}
+        <p>
+          <strong>Participants:</strong> {settlement.participants.length}
+        </p>
+        <p>
+          <strong>Owner:</strong> {settlement.owner.username}
+        </p>
+        <p>
+          <strong>Items:</strong> {settlement.items.length}
+        </p>
+        {!settlement.settled && (
+          <p>
+            <strong>Active</strong>
+          </p>
+        )}
         <Link to={`/settlement/${settlement.id}`}>Go to Settlement</Link>
       </div>
       <div>

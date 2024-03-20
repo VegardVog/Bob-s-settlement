@@ -8,6 +8,7 @@ import {
   HttpRequestsTypes,
 } from "../../contextAPI/HttpRequests";
 import SettlementList from "./Settlements/SettlementList";
+import DistributionList from "./Distributions/DistributionList";
 
 const Dashboard = () => {
   const { loggedIn } = useContext(UserContext) as UserTypes;
@@ -42,7 +43,10 @@ const Dashboard = () => {
             <p>Welcome, {userData?.username}</p>
             <p>{userData?.email}</p>
           </div>
-          <SettlementList />
+          <div className="dashboard-layout">
+            <SettlementList />
+            <DistributionList />
+          </div>
         </div>
       ) : (
         <p>Please log in to view the dashboard.</p>

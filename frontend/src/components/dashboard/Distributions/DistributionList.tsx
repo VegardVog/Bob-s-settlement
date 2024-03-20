@@ -1,15 +1,15 @@
 import { useContext, useEffect, useState } from "react";
-import SettlementItem from "./SettlementItem";
 import { UserContext, UserTypes } from "../../../contextAPI/User";
-import axios from "axios";
 import {
   HttpRequestsContext,
   HttpRequestsTypes,
 } from "../../../contextAPI/HttpRequests";
+import axios from "axios";
+import DistributionItem from "./DistributionItem";
 
-const SettlementList = () => {
+const DistributionList = () => {
   const { loggedIn } = useContext(UserContext) as UserTypes;
-  const [settlements, setSettlements] = useState([]);
+  const [distributions, setDistributions] = useState([]);
   let userId: string | null = null;
   if (loggedIn) {
     userId = sessionStorage.getItem("id");
@@ -20,9 +20,10 @@ const SettlementList = () => {
     const fetchUserData = async () => {
       try {
         const response = await axios.get(
-          baseURL + `/users/${userId}/settlements`
+          baseURL + `/users/${userId}/distributions`
         );
-        setSettlements(response.data.data); // assumes fetch ok
+        console.log(response.data.data);
+        setDistributions(response.data.data); // assumes fetch ok
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
@@ -35,12 +36,18 @@ const SettlementList = () => {
   }, [loggedIn]);
 
   return (
-    <div className="settlements">
-      {settlements.map((settlement, index) => {
-        return <SettlementItem key={index} settlement={settlement} />;
+    <div className="distributions">
+      <div className="distributionItem">
+        <span>Item name</span>
+        <span>Full price</span>
+        <span>Percent</span>
+        <span>Settlement</span>
+      </div>
+      {distributions.map((distribution, index) => {
+        return <DistributionItem key={index} distribution={distribution} />;
       })}
     </div>
   );
 };
 
-export default SettlementList;
+export default DistributionList;
