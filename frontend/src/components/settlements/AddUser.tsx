@@ -50,8 +50,12 @@ const AddUser = (props:{settlement: Settlement, setSettlements: Function, settle
     const filterUsers = () => {
         //Filter so that users already i settlement aren't included
         console.log(users)
-        setFilteredUsers(users.filter((user) => settlement.participants.some((participant) => participant.id !== user.id)));
-        console.log(settlement);
+
+        
+        setFilteredUsers(users.filter(user =>
+            !settlement.participants.some(participant => participant.id === user.id)
+          ));        
+          console.log(settlement);
         console.log(filteredUsers)
         
     };
@@ -63,6 +67,9 @@ const AddUser = (props:{settlement: Settlement, setSettlements: Function, settle
                 console.log(response);
 
                 setSettlements(settlements.map((settle) => settle.id === settlement.id ? { ...settle, participants: [...settle.participants, users.find((user) => user.id === Number(form.addUser)) ?? {} as User] }: settle));
+    
+                //Remove user from filteredUsers
+                setFilteredUsers(filteredUsers.filter((usr) => usr.id !== Number(form.addUser) ))
                 console.log(settlement);
             } catch (error) {
                 console.error(error);
