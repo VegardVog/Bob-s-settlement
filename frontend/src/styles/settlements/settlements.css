@@ -1,25 +1,23 @@
 .settlements-container {
-    display: flex;
-    flex-direction: column;
-
-
+  display: flex;
+  flex-direction: column;
+  margin-top: 10vh 0vh;
 }
 
 .settlements-title {
-    display: flex;
-    margin-top: 10vh;
-    justify-content: center;
-    align-items: center;
-    height: 10vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 10vh;
 }
 
 .settlements-list-of-settlements {
-    display: flex;
-    flex-direction: column;
-    margin: auto;
-    border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  margin-top: 7vh;
+  border: 1px solid black;
 }
 
 li {
-    list-style: none;
+  list-style: none;
 }

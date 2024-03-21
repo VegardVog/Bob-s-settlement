@@ -9,6 +9,7 @@ import {
 } from "../../contextAPI/HttpRequests";
 import SingleSettlement from "./SingleSettlement";
 import { Settlement } from "../../types/SettlementTypes";
+import CreateSettlement from "./CeateSettlement";
 
 const ListOfSettlements = (props: {
   settlements: Settlement[];
@@ -61,6 +62,10 @@ const ListOfSettlements = (props: {
       <div className="settlements-title">
         <h1>Settlements ListOfSettlements</h1>
       </div>
+      <CreateSettlement
+        settlements={settlements}
+        setSettlements={setSettlements}
+      />
       <div>
         {filteredSettlements.map(
           (settlement: Settlement, index: React.Key | null | undefined) => {

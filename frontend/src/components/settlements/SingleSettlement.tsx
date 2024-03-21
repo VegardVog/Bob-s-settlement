@@ -8,9 +8,9 @@ import RemoveUser from "./RemoveUser";
 import CloseSettlement from "./CloseSettlement";
 
 interface PropTypes {
-    settlement: Settlement;
-    settlements: Settlement[];
-    setSettlements: Function;
+  settlement: Settlement;
+  settlements: Settlement[];
+  setSettlements: Function;
 }
 
 const SingleSettlement = (props: PropTypes) => {
@@ -19,13 +19,19 @@ const SingleSettlement = (props: PropTypes) => {
   const { loggedIn } = useContext(UserContext) as UserTypes;
 
   return (
-    <div >
-        <div >
-            <h1>Title: {settlement.name}</h1>
-        </div>
-        <AddUser settlement={settlement} settlements={settlements} setSettlements={setSettlements}/>
-        <RemoveUser settlement={settlement}/>
-        <CloseSettlement
+    <div className="singleItem">
+      <div>
+        <h1>{settlement.name}</h1>
+      </div>
+      <div>
+        <AddUser
+          settlement={settlement}
+          settlements={settlements}
+          setSettlements={setSettlements}
+        />
+        <RemoveUser settlement={settlement} />
+      </div>
+      <CloseSettlement
         settlement={settlement}
         setSettlements={setSettlements}
         settlements={settlements}

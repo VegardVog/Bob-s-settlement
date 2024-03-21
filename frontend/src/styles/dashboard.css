@@ -17,6 +17,7 @@
   display: flex;
   border: solid black 1px;
   justify-content: center;
+  background-color: rgb(238, 248, 248);
   align-items: center;
   margin-top: 6vh;
   height: 10vh;

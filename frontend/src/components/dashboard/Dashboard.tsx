@@ -39,7 +39,7 @@ const Dashboard = () => {
   return (
     <div className="dashboard">
       <div className="dashboard-title">
-        <h2>Dashboard</h2>
+        <h1>Dashboard</h1>
       </div>
       {loggedIn === "true" ? (
         <div className="dashboard-container">

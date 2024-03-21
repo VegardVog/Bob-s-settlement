@@ -45,13 +45,11 @@ const CloseSettlement = (props: {
     };
     // checks if user is logged in before fetch
     if (loggedIn === "true" && goingToSettle) {
-      
       setSettled();
     }
   }, [goingToSettle]);
 
   const closeSettlement = () => {
-
     if (
       window.confirm(
         `Are you sure you want to settle ${props.settlement.name}?`
@@ -60,13 +58,14 @@ const CloseSettlement = (props: {
       setGoingToSettle(true);
     }
   };
-  
+
   return (
     <div className="closeSettlement-container">
       <button
         className="closeButton"
         onClick={closeSettlement}
         disabled={!isOwner}
+        style={{ width: "100px" }}
       >
         Settle
       </button>
