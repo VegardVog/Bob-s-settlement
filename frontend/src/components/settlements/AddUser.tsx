@@ -7,7 +7,13 @@ import { HttpRequestsContext, HttpRequestsTypes } from '../../contextAPI/HttpReq
 import {User} from "../../types/UserTypes";
 import { Settlement } from '../../types/SettlementTypes';
 
-const AddUser = (props:{settlement: Settlement, setSettlements: Function, settlements: Settlement[]}) => {
+const AddUser = (
+    props:{settlement: Settlement, 
+        setSettlements: Function, 
+        settlements: Settlement[], 
+        users: User[], 
+        }
+    ) => {
 
 
     const {loggedIn} = useContext(UserContext) as UserTypes;
@@ -16,61 +22,44 @@ const AddUser = (props:{settlement: Settlement, setSettlements: Function, settle
 
     const {baseURL} = useContext(HttpRequestsContext) as HttpRequestsTypes;
 
-    const {settlement, setSettlements, settlements} = props ?? {};
+    const {settlement, setSettlements, settlements, users} = props ?? {};
 
     const [form, setForm] = useState({
         addUser: "",
     });
 
-    const [users, setUsers] = useState<User[]>([])
     const [filteredUsers, setFilteredUsers] = useState<User[]>([])
 
-    useEffect(() => {
-        fetchUsers();
 
-    }, []);
 
     useEffect(() => {
         filterUsers();
-    }, [users]);
+    }, [users,settlements, settlement]);
 
 
-    const fetchUsers = () => {
-        const fetchData = async () => {
-            try {
-                const response = await axios.get(baseURL + "/users");
-                setUsers(response.data.data);
-
-            } catch (error) {
-                console.error(error);
-            }
-        }
-        fetchData();
-    }
     const filterUsers = () => {
-        //Filter so that users already i settlement aren't included
-        console.log(users)
-
-        
+        //Filter so that users already i settlement aren't included        
         setFilteredUsers(users.filter(user =>
             !settlement.participants.some(participant => participant.id === user.id)
           ));        
-        console.log(settlement);
-        console.log(filteredUsers)
         
     };
+  
 
     const addUser = () => {
+
+        if(filteredUsers.length === 0) {
+            return;
+          }
+      
         const fetchData = async () => {
             try {
                 const response = await axios.put(baseURL + `/settlements/${settlement.id}/add/${form.addUser}`);
-                console.log(response);
 
                 setSettlements(settlements.map((settle) => settle.id === settlement.id ? { ...settle, participants: [...settle.participants, users.find((user) => user.id === Number(form.addUser)) ?? {} as User] }: settle));
     
                 //Remove user from filteredUsers
                 setFilteredUsers(filteredUsers.filter((usr) => usr.id !== Number(form.addUser) ))
-                console.log(settlement);
             } catch (error) {
                 console.error(error);
             }
@@ -79,6 +68,7 @@ const AddUser = (props:{settlement: Settlement, setSettlements: Function, settle
         fetchData();
 
     }
+    
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -94,7 +84,6 @@ const AddUser = (props:{settlement: Settlement, setSettlements: Function, settle
             ...form,
             addUser: value
         })
-        console.log(form.addUser)
         filterUsers();
         
     };
@@ -133,7 +122,7 @@ const AddUser = (props:{settlement: Settlement, setSettlements: Function, settle
                     </option>
                 ))}
                 </select>
-                <button className='settlement-form-button' type='submit'>Add user</button>
+                <button className='settlement-form-button' type='submit' disabled={!form.addUser}>Add user</button>
             </form>
         </div>
     </div>
