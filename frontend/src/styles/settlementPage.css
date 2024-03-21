@@ -14,8 +14,15 @@
   display: flex;
   justify-content: space-around;
   width: 30vw;
+  border: 3px groove rgb(239, 249, 251);
+  margin: 0.05em 0;
+}
+
+.AsList > li > p {
+  margin: 1em;
 }
 
 .distributionsAndItems {
   display: flex;
+  flex-direction: column;
 }

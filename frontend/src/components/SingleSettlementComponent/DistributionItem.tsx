@@ -9,10 +9,10 @@ const DistributionItem = ({ distribution }: PropTypes) => {
 
   return (
     <li>
-      <p>Percent: {percent}</p>
-      <p>User: {user.email}</p>
+      <p>User: {user.username}</p>
       <p>Item Name: {item.name}</p>
-      <p>Item Price: £{item.price}</p>
+      <p>Percent: {percent.toFixed(2)}</p>
+      <p>Payed share: £{((item.price * percent) / 100).toFixed(2)}</p>
     </li>
   );
 };

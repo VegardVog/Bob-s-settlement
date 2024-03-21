@@ -11,15 +11,15 @@ import { Settlement } from "../types/SettlementTypes";
 import { Distribution } from "../types/DistributionTypes";
 import { User } from "../types/UserTypes";
 import ItemItem from "../components/SingleSettlementComponent/ItemItem";
-import DistributionItem from "../components/dashboard/Distributions/DistributionItem";
+import DistributionItem from "../components/SingleSettlementComponent/DistributionItem";
 
 const SettlementPage = () => {
   const { loggedIn, id } = useContext(UserContext) as UserTypes;
   const settlementId = useParams<{ id: string }>();
   const [settlement, setSettlement] = useState<Settlement | null>(null);
-  const [distributions, setDistributions] = useState<Distribution[] | null>(
-    null
-  );
+  const [groupedDistributions, setGroupedDistributions] = useState<
+    Map<number, Distribution[]>
+  >(new Map());
 
   const { baseURL } = useContext(HttpRequestsContext) as HttpRequestsTypes;
 
@@ -48,7 +48,19 @@ const SettlementPage = () => {
         const response = await axios.get(
           baseURL + `/settlements/${settlementId.id}/items/distributions`
         );
-        setDistributions(response.data.data); // assumes fetch ok
+        const distributions: Distribution[] = response.data.data;
+
+        // Group distributions by item
+        const grouped = new Map<number, Distribution[]>();
+        distributions.forEach((distribution) => {
+          const itemId = distribution.item.id;
+          if (grouped.has(itemId)) {
+            grouped.get(itemId)?.push(distribution);
+          } else {
+            grouped.set(itemId, [distribution]);
+          }
+        });
+        setGroupedDistributions(grouped);
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
@@ -69,23 +81,19 @@ const SettlementPage = () => {
       <div className="title">{settlement.name}</div>
       <div className="owner">{(settlement.owner as User).username}</div>
       <div className="distributionsAndItems">
-        {distributions && (
-          <ul className="AsList">
-            {distributions.map((distribution) => (
-              <DistributionItem
-                key={distribution.id}
-                distribution={distribution}
-              />
-            ))}
-          </ul>
-        )}
-        {settlement.items && (
-          <ul className="AsList">
-            {settlement.items.map((item) => (
-              <ItemItem key={item.id} item={item} />
-            ))}
-          </ul>
-        )}
+        {Array.from(groupedDistributions).map(([itemId, distributions]) => (
+          <div key={itemId}>
+            <h3>{distributions[0].item.name}</h3>
+            <ul className="AsList">
+              {distributions.map((distribution) => (
+                <DistributionItem
+                  key={distribution.id}
+                  distribution={distribution}
+                />
+              ))}
+            </ul>
+          </div>
+        ))}
       </div>
     </div>
   );
