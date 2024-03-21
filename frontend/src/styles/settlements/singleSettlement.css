@@ -1,0 +1,21 @@
+.singleItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+  background-color: #3881b2;
+  color: rgb(36, 36, 36);
+  width: 75vw;
+  border: 2px dotted rgb(47, 35, 100);
+  margin: 2em;
+}
+.singleItem > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50vw;
+}
+
+.closeSettlement-container {
+  margin: 1em 0;
+}

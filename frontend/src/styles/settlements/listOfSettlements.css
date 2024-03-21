@@ -1,3 +1,15 @@
 .settlement-list-item {
-    
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.settlements-title {
+  display: flex;
+  align-items: center;
+  background-color: #29648a;
+  height: 100%;
+}
+.settlements-title > h1 {
+  text-decoration: underline;
 }

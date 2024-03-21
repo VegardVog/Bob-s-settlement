@@ -9,7 +9,7 @@ import {
 } from "../../contextAPI/HttpRequests";
 import SettlementList from "./Settlements/SettlementList";
 import DistributionList from "./Distributions/DistributionList";
-import BobImage from "../../assets/Bob2.jpg";
+import BobImage from "../../assets/Bob2.png";
 
 const Dashboard = () => {
   const { loggedIn } = useContext(UserContext) as UserTypes;
@@ -38,12 +38,13 @@ const Dashboard = () => {
   }, [loggedIn]);
 
   return (
-    
     <div className="dashboard">
-      <div className="dashboard-title">
-        <h2>Tired of not getting back money you are owed? </h2>
-      </div>
-      
+      {!loggedIn && (
+        <div className="dashboard-title">
+          <h2>Tired of not getting back money you are owed? </h2>
+        </div>
+      )}
+
       {loggedIn === "true" ? (
         <div className="dashboard-container">
           <div className="user-info">
@@ -57,16 +58,18 @@ const Dashboard = () => {
         </div>
       ) : (
         <div className="dashboard-container-notLoggedIn">
-          <div className="dashboard-item"> 
+          <div className="dashboard-item">
             <h2>Settle your debts now </h2>
-            <p className="dashboard-description">By using Bob's settlement, you are contributing to all of Bob's enterprises. 
-            <br/> Just look at how happy bob is{" ---->"}. <br/> Just use our website and this can be you too! </p>
-
+            <p className="dashboard-description">
+              By using Bob's settlement, you are contributing to all of Bob's
+              enterprises.
+              <br /> Just look at how happy bob is{" ---->"}. <br /> Just use
+              our website and this can be you too!{" "}
+            </p>
           </div>
           <div className="dashboard-item">
-            <img src={BobImage} alt="Bob"/>
+            <img src={BobImage} alt="Bob" />
           </div>
-            
         </div>
       )}
     </div>

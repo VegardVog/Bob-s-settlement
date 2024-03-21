@@ -8,12 +8,15 @@ import RemoveUser from "./RemoveUser";
 import CloseSettlement from "./CloseSettlement";
 import { User } from "../../types/UserTypes";
 import axios from "axios";
-import { HttpRequestsContext, HttpRequestsTypes } from "../../contextAPI/HttpRequests";
+import {
+  HttpRequestsContext,
+  HttpRequestsTypes,
+} from "../../contextAPI/HttpRequests";
 
 interface PropTypes {
-    settlement: Settlement;
-    settlements: Settlement[];
-    setSettlements: Function;
+  settlement: Settlement;
+  settlements: Settlement[];
+  setSettlements: Function;
 }
 
 const SingleSettlement = (props: PropTypes) => {
@@ -21,43 +24,50 @@ const SingleSettlement = (props: PropTypes) => {
 
   const { loggedIn } = useContext(UserContext) as UserTypes;
 
-  const {baseURL} = useContext(HttpRequestsContext) as HttpRequestsTypes;
+  const { baseURL } = useContext(HttpRequestsContext) as HttpRequestsTypes;
 
-  const [users, setUsers] = useState<User[]>([])
-  
+  const [users, setUsers] = useState<User[]>([]);
 
   useEffect(() => {
-      fetchUsers();
+    fetchUsers();
   }, []);
 
-
-
-
   const fetchUsers = () => {
-      const fetchData = async () => {
-          try {
-              const response = await axios.get(baseURL + "/users");
-              setUsers(response.data.data);
-
-          } catch (error) {
-              console.error(error);
-          }
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(baseURL + "/users");
+        setUsers(response.data.data);
+      } catch (error) {
+        console.error(error);
       }
-      fetchData();
-  }
+    };
+    fetchData();
+  };
 
   return (
-    <div >
-        <div >
-            <h1>Title: {settlement.name}</h1>
+    <div>
+      <div className="singleItem">
+        <div>
+          <h1>{settlement.name}</h1>
         </div>
-        <AddUser settlement={settlement} settlements={settlements} setSettlements={setSettlements} users={users} />
-        <RemoveUser settlement={settlement} settlements={settlements} setSettlements={setSettlements} users={users}/>
+        <AddUser
+          settlement={settlement}
+          settlements={settlements}
+          setSettlements={setSettlements}
+          users={users}
+        />
+        <RemoveUser
+          settlement={settlement}
+          settlements={settlements}
+          setSettlements={setSettlements}
+          users={users}
+        />
         <CloseSettlement
-        settlement={settlement}
-        setSettlements={setSettlements}
-        settlements={settlements}
-      />
+          settlement={settlement}
+          settlements={settlements}
+          setSettlements={setSettlements}
+        />
+      </div>
     </div>
   );
 };

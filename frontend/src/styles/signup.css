@@ -1,29 +1,29 @@
 .signup-form-container {
-    display: flex;
-    flex-direction: column;
-    height: 65vh;
-    width: 50vw;
-    background-color: #29648A;
-    border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  height: 65vh;
+  width: 50vw;
+  background-color: #29648a;
+  border-radius: 15px;
+  border: 1px solid rgb(1, 29, 67);
 }
 
 .form-submitButton {
-    width: 80%;
-    border-radius: 2%;
-    margin: 2%;
-    margin-left: 10%;
-    
+  width: 80%;
+  border-radius: 2%;
+  margin: 2%;
+  margin-left: 10%;
 }
 
 .signup-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: auto;
-    text-align: center;
-    height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  text-align: center;
+  height: 100vh;
 }
 
 .signup-form-item {
-    margin: 2%;
+  margin: 2%;
 }

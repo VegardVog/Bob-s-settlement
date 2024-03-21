@@ -2,6 +2,8 @@ package com.booleanuk.bob.controllers;
 
 import com.booleanuk.bob.exceptions.CustomDataNotFoundException;
 import com.booleanuk.bob.exceptions.CustomParamaterConstraintException;
+import com.booleanuk.bob.models.Distribution;
+import com.booleanuk.bob.models.Item;
 import com.booleanuk.bob.models.Settlement;
 import com.booleanuk.bob.models.User;
 import com.booleanuk.bob.repository.SettlementRepository;
@@ -12,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -86,5 +89,16 @@ public class SettlementController {
         } else {
             throw new CustomParamaterConstraintException(user.getUsername() + " was not a participant");
         }
+    }
+
+    @GetMapping("{settlementId}/items/distributions")
+    public ResponseEntity<?> getAllDistributions(@PathVariable int settlementId) {
+        Settlement settlement = this.settlementRepository.findById(settlementId)
+                .orElseThrow(() -> new CustomDataNotFoundException("Settlement not found"));
+        List<Distribution> distributionList = new ArrayList<>();
+        for(Item item : settlement.getItems()) {
+            distributionList.addAll(item.getDistributions());
+        }
+        return ResponseEntity.ok(new SuccessResponse(distributionList));
     }
 }
