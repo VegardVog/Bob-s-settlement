@@ -1,9 +1,10 @@
 import React, { ChangeEvent, useContext, useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { UserContext, UserTypes } from '../../contextAPI/User';
-import "../../styles/profile.css"
+import "../../styles//profile/profile.css"
 import { HttpRequestsContext, HttpRequestsTypes } from '../../contextAPI/HttpRequests';
 import axios from 'axios';
+import History from './History';
 
 const Profile = () => {
 
@@ -120,6 +121,7 @@ const Profile = () => {
             </form>
         </div>
 
+        <History />
     </div>
   )
 }
