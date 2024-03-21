@@ -7,6 +7,7 @@ import Dashboard from "./components/dashboard/Dashboard";
 import Menu from "./components/Menu";
 import Profile from "./components/profile/Profile";
 import Settlements from "./components/settlements/Settlements";
+import SettlementPage from "./pages/SettlementPage";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/" element={<Dashboard />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/settlements" element={<Settlements />} />
+        <Route path="/settlements/:id" element={<SettlementPage />} />
       </Routes>
     </>
   );
