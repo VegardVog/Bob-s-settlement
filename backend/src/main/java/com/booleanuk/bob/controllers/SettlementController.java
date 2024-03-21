@@ -81,6 +81,7 @@ public class SettlementController {
         List<User> participants = settlement.getParticipants();
         if(settlement.getParticipants().contains(user)) {
             settlement.getParticipants().remove(user);
+            settlementRepository.save(settlement);
             return ResponseEntity.ok(new SuccessResponse(participants));
         } else {
             throw new CustomParamaterConstraintException(user.getUsername() + " was not a participant");
