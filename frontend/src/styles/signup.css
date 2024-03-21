@@ -3,7 +3,8 @@
     flex-direction: column;
     height: 65vh;
     width: 50vw;
-    border: solid black 1px;
+    background-color: #29648A;
+    border-radius: 15px;
 }
 
 .form-submitButton {

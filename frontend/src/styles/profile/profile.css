@@ -23,7 +23,6 @@
     flex-direction: column;
     height: 65vh;
     width: 50vw;
-    border: solid black 1px;
     
 
 }
@@ -33,4 +32,6 @@
     justify-content: center;
     align-items: center;
     margin: auto;
+    background-color: #29648A;
+    border-radius: 15px
 }

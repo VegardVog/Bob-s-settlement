@@ -15,7 +15,6 @@
 
 .dashboard-title {
   display: flex;
-  border: solid black 1px;
   justify-content: center;
   align-items: center;
   margin-top: 6vh;
@@ -24,6 +23,7 @@
 .dashboard {
   display: flex;
   flex-direction: column;
+  height: 100vh;
 }
 
 .dashboard-layout {
@@ -38,16 +38,26 @@
   align-items: center;
 }
 
+a {
+  color: #AAA648;
+}
+
+
 .settlementItem {
   display: flex;
   width: 50vw;
   border: 1px solid rgb(177, 177, 169);
   background-color: rgb(243, 243, 236);
   margin: 0 0 1em 0;
+  background-color: #29648A;
+  border-radius: 15px;
+
 }
 .settlementItem > div {
   padding: 5px;
+
 }
+
 
 .distributions {
   display: flex;
@@ -69,4 +79,21 @@
 
 .distributionItem > span {
   width: 100px;
+}
+
+
+.dashboard-description {
+  font-size: x-large;
+}
+
+.dashboard-container-notLoggedIn {
+  display: flex;
+  flex-direction: row;
+
+}
+
+.dashboard-item {
+  width: 45vw;
+  margin-left: 2.5vw;
+  margin-right: 2.5vw;
 }
