@@ -13,6 +13,7 @@ const Settlements = () => {
 
   const [settlements, setSettlements] = useState<Settlement[]>([]);
 
+    
   return (
     <div className="settlements-container">
       <div className="settlements-list-of-settlements">

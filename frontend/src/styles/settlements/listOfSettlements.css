@@ -7,6 +7,9 @@
 .settlements-title {
   display: flex;
   align-items: center;
-  background-color: rgb(238, 248, 248);
+  background-color: #29648a;
   height: 100%;
+}
+.settlements-title > h1 {
+  text-decoration: underline;
 }

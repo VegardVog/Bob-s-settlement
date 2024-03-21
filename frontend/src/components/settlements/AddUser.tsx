@@ -14,6 +14,7 @@ const AddUser = (props: {
   settlement: Settlement;
   setSettlements: Function;
   settlements: Settlement[];
+  users: User[];
 }) => {
   const { loggedIn } = useContext(UserContext) as UserTypes;
 
@@ -21,38 +22,20 @@ const AddUser = (props: {
 
   const { baseURL } = useContext(HttpRequestsContext) as HttpRequestsTypes;
 
-  const { settlement, setSettlements, settlements } = props ?? {};
+  const { settlement, setSettlements, settlements, users } = props ?? {};
 
   const [form, setForm] = useState({
     addUser: "",
   });
 
-  const [users, setUsers] = useState<User[]>([]);
   const [filteredUsers, setFilteredUsers] = useState<User[]>([]);
 
   useEffect(() => {
-    fetchUsers();
-  }, []);
-
-  useEffect(() => {
     filterUsers();
-  }, [users]);
+  }, [users, settlements, settlement]);
 
-  const fetchUsers = () => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(baseURL + "/users");
-        setUsers(response.data.data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    fetchData();
-  };
   const filterUsers = () => {
     //Filter so that users already i settlement aren't included
-    console.log(users);
-
     setFilteredUsers(
       users.filter(
         (user) =>
@@ -61,17 +44,18 @@ const AddUser = (props: {
           )
       )
     );
-    console.log(settlement);
-    console.log(filteredUsers);
   };
 
   const addUser = () => {
+    if (filteredUsers.length === 0) {
+      return;
+    }
+
     const fetchData = async () => {
       try {
         const response = await axios.put(
           baseURL + `/settlements/${settlement.id}/add/${form.addUser}`
         );
-        console.log(response);
 
         setSettlements(
           settlements.map((settle) =>
@@ -92,7 +76,6 @@ const AddUser = (props: {
         setFilteredUsers(
           filteredUsers.filter((usr) => usr.id !== Number(form.addUser))
         );
-        console.log(settlement);
       } catch (error) {
         console.error(error);
       }
@@ -115,7 +98,6 @@ const AddUser = (props: {
       ...form,
       addUser: value,
     });
-    console.log(form.addUser);
     filterUsers();
   };
 
@@ -146,7 +128,11 @@ const AddUser = (props: {
               </option>
             ))}
           </select>
-          <button className="settlement-form-button" type="submit">
+          <button
+            className="settlement-form-button"
+            type="submit"
+            disabled={!form.addUser}
+          >
             Add user
           </button>
         </form>

@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { UserContext, UserTypes } from "../../contextAPI/User";
 import { Settlement } from "../../types/SettlementTypes";
-import "../../styles/settlements/closeSettlement.css";
+import "../../styles/settlements/singleSettlement.css";
 import axios from "axios";
 import {
   HttpRequestsContext,

@@ -6,6 +6,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   height: 100vh;
+  background-color: #d1d2e2;
 }
 body > div {
   display: flex;
@@ -19,4 +20,9 @@ code {
 html,
 body {
   height: 100vh;
+}
+
+input,
+button {
+  background-color: #e8e9f8;
 }

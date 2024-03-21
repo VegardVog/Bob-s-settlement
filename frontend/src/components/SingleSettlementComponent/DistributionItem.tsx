@@ -1,4 +1,5 @@
 import { Distribution } from "../../types/DistributionTypes";
+import "../../styles/singleSettlementComponent.css";
 
 interface PropTypes {
   distribution: Distribution;

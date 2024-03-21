@@ -1,0 +1,11 @@
+.history-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: 10vw;
+    margin-right: 10vw;
+    background-color: #E9F1FA;
+    border-radius: 20px;
+
+}

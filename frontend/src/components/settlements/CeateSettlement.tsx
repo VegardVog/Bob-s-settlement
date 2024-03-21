@@ -58,7 +58,7 @@ const CreateSettlement = (props: {
   };
 
   return (
-    <div className="settlements-container">
+    <div className="create-container">
       <div>
         <form onSubmit={handleSubmit}>
           <label htmlFor="name">

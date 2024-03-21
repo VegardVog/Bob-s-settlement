@@ -38,10 +38,18 @@ const DistributionList = () => {
   return (
     <div className="distributions">
       <div className="distributionItem">
-        <span>Item name</span>
-        <span>Full price</span>
-        <span>Percent</span>
-        <span>Settlement</span>
+        <strong>
+          <span>Item name</span>
+        </strong>
+        <strong>
+          <span>Full price</span>
+        </strong>
+        <strong>
+          <span>Percent</span>
+        </strong>
+        <strong>
+          <span>Settlement</span>
+        </strong>
       </div>
       {distributions.map((distribution, index) => {
         return <DistributionItem key={index} distribution={distribution} />;

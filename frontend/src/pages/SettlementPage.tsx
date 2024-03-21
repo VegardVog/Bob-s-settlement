@@ -10,8 +10,8 @@ import { useParams } from "react-router-dom";
 import { Settlement } from "../types/SettlementTypes";
 import { Distribution } from "../types/DistributionTypes";
 import { User } from "../types/UserTypes";
-import ItemItem from "../components/SingleSettlementComponent/ItemItem";
 import DistributionItem from "../components/SingleSettlementComponent/DistributionItem";
+import "../styles/singleSettlementComponent.css";
 
 const SettlementPage = () => {
   const { loggedIn, id } = useContext(UserContext) as UserTypes;
@@ -78,8 +78,10 @@ const SettlementPage = () => {
 
   return (
     <div className="settlement">
-      <div className="title">{settlement.name}</div>
-      <div className="owner">{(settlement.owner as User).username}</div>
+      <div className="settlementInfo">
+        <h2>Name: {settlement.name}</h2>
+        <h2>Owner: {(settlement.owner as User).username}</h2>
+      </div>
       <div className="distributionsAndItems">
         {Array.from(groupedDistributions).map(([itemId, distributions]) => (
           <div key={itemId}>

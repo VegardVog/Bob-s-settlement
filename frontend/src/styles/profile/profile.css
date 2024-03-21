@@ -8,9 +8,7 @@
 
 .profile-title {
   display: flex;
-  margin-top: 7vh;
-  border: solid black 1px;
-  background-color: rgb(238, 248, 248);
+  margin-top: 10vh;
   justify-content: center;
   align-items: center;
   height: 10vh;
@@ -21,7 +19,6 @@
   flex-direction: column;
   height: 65vh;
   width: 50vw;
-  border: solid black 1px;
 }
 
 .profile-form-container {
@@ -29,4 +26,6 @@
   justify-content: center;
   align-items: center;
   margin: auto;
+  background-color: #29648a;
+  border-radius: 15px;
 }

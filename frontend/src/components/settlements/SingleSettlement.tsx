@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { UserContext, UserTypes } from "../../contextAPI/User";
 import "../../styles/settlements/singleSettlement.css";
@@ -6,6 +6,12 @@ import { Settlement } from "../../types/SettlementTypes";
 import AddUser from "./AddUser";
 import RemoveUser from "./RemoveUser";
 import CloseSettlement from "./CloseSettlement";
+import { User } from "../../types/UserTypes";
+import axios from "axios";
+import {
+  HttpRequestsContext,
+  HttpRequestsTypes,
+} from "../../contextAPI/HttpRequests";
 
 interface PropTypes {
   settlement: Settlement;
@@ -18,24 +24,50 @@ const SingleSettlement = (props: PropTypes) => {
 
   const { loggedIn } = useContext(UserContext) as UserTypes;
 
+  const { baseURL } = useContext(HttpRequestsContext) as HttpRequestsTypes;
+
+  const [users, setUsers] = useState<User[]>([]);
+
+  useEffect(() => {
+    fetchUsers();
+  }, []);
+
+  const fetchUsers = () => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(baseURL + "/users");
+        setUsers(response.data.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchData();
+  };
+
   return (
-    <div className="singleItem">
-      <div>
-        <h1>{settlement.name}</h1>
-      </div>
-      <div>
+    <div>
+      <div className="singleItem">
+        <div>
+          <h1>{settlement.name}</h1>
+        </div>
         <AddUser
           settlement={settlement}
           settlements={settlements}
           setSettlements={setSettlements}
+          users={users}
         />
-        <RemoveUser settlement={settlement} />
+        <RemoveUser
+          settlement={settlement}
+          settlements={settlements}
+          setSettlements={setSettlements}
+          users={users}
+        />
+        <CloseSettlement
+          settlement={settlement}
+          settlements={settlements}
+          setSettlements={setSettlements}
+        />
       </div>
-      <CloseSettlement
-        settlement={settlement}
-        setSettlements={setSettlements}
-        settlements={settlements}
-      />
     </div>
   );
 };

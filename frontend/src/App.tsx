@@ -19,7 +19,7 @@ function App() {
         <Route path="/" element={<Dashboard />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/settlements" element={<Settlements />} />
-        <Route path="/settlements/:id" element={<SettlementPage />} />
+        <Route path="/settlement/:id" element={<SettlementPage />} />
       </Routes>
     </>
   );

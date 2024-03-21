@@ -3,6 +3,7 @@
   flex-direction: column;
   height: 100vh;
   width: 100vw;
+  margin-top: 10vh;
   align-items: center;
 }
 .user-info {
@@ -15,16 +16,17 @@
 
 .dashboard-title {
   display: flex;
-  border: solid black 1px;
   justify-content: center;
   background-color: rgb(238, 248, 248);
   align-items: center;
-  margin-top: 6vh;
+  margin-top: 10vh;
   height: 10vh;
 }
 .dashboard {
   display: flex;
   flex-direction: column;
+  height: 100vh;
+  width: 100vw;
 }
 
 .dashboard-layout {
@@ -39,22 +41,31 @@
   align-items: center;
 }
 
+a {
+  color: rgb(111, 109, 42);
+}
+
 .settlementItem {
   display: flex;
   width: 50vw;
   border: 1px solid rgb(177, 177, 169);
-  background-color: rgb(243, 243, 236);
   margin: 0 0 1em 0;
+  background-color: #29648a;
+  border-radius: 15px;
 }
 .settlementItem > div {
   padding: 5px;
+}
+.settlementItem > div > h4 {
+  margin-right: 5em;
+  margin-left: 3em;
 }
 
 .distributions {
   display: flex;
   flex-direction: column;
   height: fit-content;
-  background-color: rgb(250, 236, 219);
+  background-color: #29648a;
   margin: 0 1em;
   box-shadow: 0px 5px 5px 5px rgb(250, 236, 219);
 }
@@ -64,10 +75,29 @@
   justify-content: space-between;
   margin: 0.2em;
   padding: 0 1em;
-  border: 1px solid rgb(185, 177, 168);
-  background-color: rgb(255, 246, 235);
 }
 
 .distributionItem > span {
   width: 100px;
+}
+
+.dashboard-description {
+  font-size: x-large;
+}
+
+.dashboard-container-notLoggedIn {
+  display: flex;
+  flex-direction: row;
+}
+
+.dashboard-item {
+  width: 45vw;
+  margin-left: 2.5vw;
+  margin-right: 2.5vw;
+}
+
+img {
+  margin-top: 3em;
+  margin-left: 3em;
+  width: 45vw;
 }
