@@ -30,13 +30,10 @@ const ListOfSettlements = (props: {
   }, []);
 
   useEffect(() => {
-    console.log("Sell");
     const filtered = settlements.filter(
       (settlement) => settlement.settled === false
     );
     setFilteredSettlements(filtered);
-    console.log(settlements);
-    console.log(filtered);
   }, [settlements]);
 
   const getSettlementsFromUser = () => {
@@ -44,7 +41,6 @@ const ListOfSettlements = (props: {
       try {
         const response = await axios.get(baseURL + `/users/${id}/settlements`);
         setSettlements(response.data.data);
-        console.log(response);
       } catch (error) {
         console.error(error);
       }

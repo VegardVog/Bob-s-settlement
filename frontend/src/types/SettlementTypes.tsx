@@ -5,5 +5,5 @@ export interface Settlement {
     name: string;
     settled: boolean;
     owner: object;
-    participants: [User];
+    participants: User[];
 }
